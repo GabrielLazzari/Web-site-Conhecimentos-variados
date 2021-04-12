@@ -1,0 +1,45 @@
+
+section{
+    flex-wrap: wrap;
+    justify-content: center;
+    display: flex;
+
+}
+section #d1{
+    background-color: chocolate;
+    border: 2px solid black;
+    flex: 1;
+    margin: 5px;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 250px;
+    max-height: 250px;
+}
+
+#d1{
+    border-radius: 10px;
+}
+
+table{
+    padding: 0px;
+    margin: 0px;
+}
+
+td{
+    width: 50%;
+    height: 190px;
+    text-align: center;
+}
+img{
+    margin: auto;
+
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+a:hover{
+    background-color: aqua;
+    border-radius: 10px;
+
+}
