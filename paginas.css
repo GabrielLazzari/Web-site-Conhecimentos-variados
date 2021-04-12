@@ -9,10 +9,9 @@
 }
 
 #im_titulo{
-
+    object-fit: cover;
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0px 10px 20px rgb(90, 90, 90);
 }
 
 h1{
