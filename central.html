@@ -1,124 +1,190 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central</title>
+    <title>Document</title>
 
     <link rel="stylesheet" href="central.css">
 
-    <style>
-
-
-    </style>
-
 </head>
+
 <body>
     
-    <section>
-        <a target="_self" href="foquete saturno v/fogute saturno v.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Foguete Saturno V</td>
-                    </th>
-                </table>
-            </div>
-        </a>
-            
-        <a target="_self" href="vulcão azul/vulcao azul.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Vulcão de Lava Azul</td>
-                    </th>
-                </table>
-            </div>
-        </a>
+    <section id="se1">
+        <div id="sol">Sol</div>
 
-        <a target="_self" href="girassóis/girassois.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Girassóis</td>
-                    </th>
-                </table>
-            </div>
-        </a>
-
-        <a target="_self" href="torre eiffel/torre eiffel.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Torre Eiffel</td>
-                    </th>
-                </table>
-            </div>
-        </a>
+    </section>
+    <section id="se2">
+        <div id="c1">
+            <div id="cc">Astronomia</div>
+        </div>
+        <div id="c2">
+            <div id="cc">Natureza</div>
+        </div>
+        <div id="c3">
+            <div id="cc">Invensões</div>
+        </div>
+        <div id="c4">
+            <div id="cc">Construções</div>
+        </div>
+    </section>
+    <section id="se3">
 
 
-        <a target="_self" href="canal panama/canal do panama.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Canal do Panamá</td>
-                    </th>
-                </table>
-            </div>
-        </a>
-
-        <a target="_self" href="monte everest/monte everest.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Monte Evereste</td>
-                    </th>
-                </table>
-            </div>
-        </a>
-
-        <a target="_self" href="telescópio/telescópio.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>O Telescópio</td>
-                    </th>
-                </table>
-            </div>
-        </a>
-
-        <a target="_self" href="nebulosas/nebulosas.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Nebulosas</td>
-                    </th>
-                </table>
-            </div>
-        </a>
-
-        <a target="_self" href="abelhas/abelhas.html">
-            <div id="d1">
-                <table>
-                    <th>
-                        <td><img src="" alt=""></td>
-                        <td>Abelhas</td>
-                    </th>
-                </table>
-            </div>
-        </a>
+    </section>
+    <section id="se4">
 
     </section>
 
+
+    <script>
+
+        var sec = document.getElementById('se3')
+        
+        var sol= document.getElementById('sol')
+        var c1= document.getElementById('c1')
+        var c2= document.getElementById('c2')
+        var c3= document.getElementById('c3')
+        var c4= document.getElementById('c4')
+        
+        var lis_categorias = [sol, c1, c2, c3, c4]
+        
+        var lista= []
+        var list_im = []
+        var list_txt = []
+        var selecionar = 0 // Qual a categoria selecionada
+        var tam_cat = 0 // Comprimento da categoria selecionada
+        var janela = 0
+
+        var img = 0
+        var titulo = 0
+        var link = 0
+
+        var valor = 1;
+        if (localStorage.getItem('selecionado') == null){
+            localStorage.setItem('selecionado', "1")
+        }else{
+            valor = localStorage.getItem('selecionado');
+        }
+        
+        // Sempre que arir o site ele pega a informaçao na memoria
+        selecionar = valor; 
+
+        // Limpa a lista com as informaçoes toda vez que mudar de categoria
+        function limpar(){
+            while(sec.firstChild){
+                sec.removeChild(sec.firstChild)
+                lista.pop()
+            }
+        }
+
+        for(var c = 0; c < lis_categorias.length; c++){
+            lis_categorias[c].addEventListener("click", function () {
+            selecionar = lis_categorias.indexOf(this)
+            //window.alert(selecionar +'e')
+            valor = selecionar
+            localStorage.setItem('selecionado', valor)
+            carregar()
+            })
+        }
+
+        function carregar(){
+            limpar()
+            if (selecionar == 0){
+                //window.alert('sol')
+                img = 0
+                titulo = 0
+                link = 0
+                
+                tam_cat = titulo.length
+
+            }else if (selecionar == 1){
+
+                img = ['', '']
+                titulo = ['Foguete Saturno V', 'Nebulosas']
+                link = ["foquete saturno v/fogute saturno v.html", "nebulosas/nebulosas.html"]
+                
+                tam_cat = titulo.length
+            
+            }else if (selecionar == 2){
+
+                img = ['', 'girassois/girassois ico.png', '', '']
+                titulo = ['Vulcão Azul', 'Girassóis', 'Monte Evereste', 'Abelhas']
+                link = ["vulcao azul/vulcao azul.html", "girassois/girassois.html", 
+                        "monte everest/monte everest.html", "abelhas/abelhas.html"]
+                
+                tam_cat = titulo.length
+
+            }else if (selecionar == 3){
+
+                img = ['']
+                titulo = ['O Telescópio']
+                link = ["telescopio/telescopio.html"]
+                
+                tam_cat = titulo.length
+   
+            }  else if (selecionar == 4){
+
+                img = ['', '']
+                titulo = ['Torre Eiffel', 'Canal do Panamá']
+                link = ["torre eiffel/torre eiffel.html", "canal panama/canal do panama.html"]
+
+                tam_cat = titulo.length
+            }        
+            return exe(tam_cat, selecionar)
+        }  
+        
+        carregar()
+
+        function exe(tam_cat, selecionar){
+        for ( var i = 0; i < tam_cat; i++){  
+            //Adiciona uma nova div na lista
+            lista.push( document.createElement("DIV") );     
+            
+            // Da um id para o item na lista
+            lista[i].setAttribute('id', 'd1')
+            
+            // Adiciona o item na sessão 3 no html
+            sec.appendChild(lista[i])
+
+            // Adicina uma imagem na div
+            list_im[i] = document.createElement('img')
+            list_im[i].setAttribute('src', img[i])  
+            lista[i].appendChild(list_im[i])
+            
+            //Adiciona um texto na div
+            list_txt[i] = document.createElement('p')
+            list_txt[i].innerHTML = titulo[i]
+            lista[i].appendChild(list_txt[i])
+            
+            // Para pegar o  link certo
+            lista[i].addEventListener("click", function () {
+            window.location.href= link[lista.indexOf(this)];  // window.open("teste.html"); abre o link em uma nova guia 
+            })
+        }
+        
+        // Parte resposavel por colocar a cor de fundo da categoria selecionada
+        var secundaria = []
+        for (var c =1; c < lis_categorias.length; c++){
+            if (c != selecionar){
+                secundaria.push(lis_categorias[c])
+            }
+        }
+        // If que limpa todas cores ao clicar no item sol
+        if (selecionar > 0){
+        lis_categorias[selecionar].style.backgroundColor = 'rgb(77, 89, 250)';
+        }
+        for (var t = 0; t < secundaria.length; t++){
+            if (secundaria[t].style.backgroundColor == 'rgb(77, 89, 250)'){   
+                secundaria[t].style.backgroundColor = 'rgb(114, 238, 90)';
+            }
+        }
+        }
+
+
+    </script>
 
 </body>
 </html>
