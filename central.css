@@ -33,12 +33,11 @@ body{
     overflow-x: hidden;
 }
 
-#c1, #c2, #c3, #c4{
+.cats{
     background-color: rgb(114, 238, 90);
     width: 100%;
-    margin-top: 8%;
+    margin-top: 5%;
     padding: 10px;
-
 }
 
 #cc{

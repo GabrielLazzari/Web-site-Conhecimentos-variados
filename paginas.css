@@ -23,4 +23,18 @@ p{
     text-align: justify;
     margin: 20px;
     font-size: 25px;
+    text-indent: 3em; /*Identação da primeira linha de um páragrafo*/
+}
+
+
+table{
+    border-collapse: collapse;
+    float: right;
+    margin: 30px;
+}
+td, th{
+    border: black 2px solid;
+    text-align: center;
+    padding: 5px 20px 5px 20px;
+
 }
