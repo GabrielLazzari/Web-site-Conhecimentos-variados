@@ -58,6 +58,27 @@
         
         var lis_categorias = [sol, c1, c2, c3, c4]
         
+        var matriz_nome = [0,
+                           ['Foguete Saturno V', 'Nebulosas'], 
+                           ['Vulcão Azul', 'Girassóis', 'Fonte Evereste', 'FAbelhas'], 
+                           ['O Telescópio'],
+                           ['Torre Eiffel', 'Canal do Panamá']]
+
+        var matriz_img = [0,
+                          ['', ''],            
+                          ['', 'girassois/girassois ico.jpg', '', ''], 
+                          [''],
+                          ['', '']]
+
+        var matriz_link = [0,
+                           ["foguete saturno v/foguete saturno v.html", 
+                           "nebulosas/nebulosas.html"], 
+                           ["vulcao azul/vulcao azul.html", "girassois/girassois.html", 
+                            "monte everest/monte everest.html", "abelhas/abelhas.html"], 
+                           ["telescopio/telescopio.html"],
+                           ["torre eiffel/torre eiffel.html", "canal panama/canal do panama.html"]]
+
+
         var lista= []
         var list_im = []
         var list_txt = []
@@ -81,16 +102,18 @@
             }
         }
 
+        //Serve para cirar a variavel de armazenamento
+        //Se ja tiver sido criada pega o valor que esta nela
         var valor = 1;
         if (localStorage.getItem('selecionado') == null){
             localStorage.setItem('selecionado', "1")
         }else{
             valor = localStorage.getItem('selecionado');
-        }
-        
-        // Sempre que arir o site ele pega a informaçao na memoria
+        } 
+        // O valor na memoria é repassasdo para o selecionar
         selecionar = valor; 
 
+        
         // Limpa a lista com as informaçoes toda vez que mudar de categoria
         function limpar(){
             while(sec.firstChild){
@@ -109,54 +132,21 @@
             })
         }
 
+        //Mostra na tela os itens da categoria selecionada
         function carregar(){
             limpar()
-            if (selecionar == 0){
-                //window.alert('sol')
-                img = 0
-                titulo = 0
-                link = 0
-                
-                tam_cat = titulo.length
-
-            }else if (selecionar == 1){
-
-                img = ['', '']
-                titulo = ['Foguete Saturno V', 'Nebulosas']
-                link = ["foguete saturno v/foguete saturno v.html", "nebulosas/nebulosas.html"]
-                
-                tam_cat = titulo.length
             
-            }else if (selecionar == 2){
-
-                img = ['', 'girassois/girassois ico.jpg', '', '']
-                titulo = ['Vulcão Azul', 'Girassóis', 'Monte Evereste', 'Abelhas']
-                link = ["vulcao azul/vulcao azul.html", "girassois/girassois.html", 
-                "monte everest/monte everest.html", "abelhas/abelhas.html"]
+            img = matriz_img[selecionar]
+                titulo = matriz_nome[selecionar]
+                link = matriz_link[selecionar] 
                 
                 tam_cat = titulo.length
-
-            }else if (selecionar == 3){
-
-                img = ['']
-                titulo = ['O Telescópio']
-                link = ["telescopio/telescopio.html"]
-                
-                tam_cat = titulo.length
-   
-            }  else if (selecionar == 4){
-
-                img = ['', '']
-                titulo = ['Torre Eiffel', 'Canal do Panamá']
-                link = ["torre eiffel/torre eiffel.html", "canal panama/canal do panama.html"]
-
-                tam_cat = titulo.length
-            }        
             return exe(tam_cat, selecionar)
         }  
         
         carregar()
 
+        //Responsavel por colocar a imagem e o texto na div do item
         function exe(tam_cat, selecionar){
         for ( var i = 0; i < tam_cat; i++){  
             //Adiciona uma nova div na lista
