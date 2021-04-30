@@ -2,7 +2,7 @@ body{
     margin: 0px;
 }
 
-#d1{
+.d1{
     height: 240px;
     width: 380px;
     background-color: rgb(80, 180, 255);
@@ -12,7 +12,7 @@ body{
     box-shadow: 5px 5px 5px rgb(88, 85, 85, 0.8) 
 }
 
-#d1:hover{
+.d1:hover{
     background-color: rgb(140, 230, 240);
 }
 

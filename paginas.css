@@ -1,5 +1,5 @@
 
-#d1{
+.d1{
 
     border-radius: 10px;
     width: 80%;
@@ -8,7 +8,7 @@
 
 }
 
-#im_titulo{
+.im_titulo{
 
     width: 100%;
     border-radius: 10px;
@@ -37,4 +37,19 @@ td, th{
     text-align: center;
     padding: 5px 20px 5px 20px;
 
+}
+
+.img_float_left{
+    float: left;
+    margin-right: 20px;
+    max-width: 100%;
+}
+
+.img_float_right{
+    float: right;
+    margin-left: 20px;
+    max-width: 100%;
+}
+.mapa{
+    max-width: 100%; 
 }
