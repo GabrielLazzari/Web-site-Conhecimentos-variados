@@ -15,21 +15,22 @@
     <section id="se1">
         <div id="sol">Sol</div>
         <div id="menu"> Esconder Categorias</div>
+        <input id="pesquisa" type="text" placeholder="Pesquisar">
 
     </section>
     <section id="se2" >
 
         <div id="c1" class="cats">
-            <div id="cc">Astronomia</div>
+            <div class="cc">Astronomia</div>
         </div>
         <div id="c2" class="cats">
-            <div id="cc">Natureza</div>
+            <div class="cc">Natureza</div>
         </div>
         <div id="c3" class="cats">
-            <div id="cc">Invensões</div>
+            <div class="cc">Invensões</div>
         </div>
         <div id="c4" class="cats">
-            <div id="cc">Construções</div>
+            <div class="cc">Construções</div>
         </div>
 
     </section>
@@ -50,6 +51,9 @@
         var menu = document.getElementById('menu')
         menu.addEventListener('click', esconder)
         
+        var pesquisa = document.getElementById('pesquisa')
+        pesquisa.addEventListener('keyup', pesquisando)
+
         var sol= document.getElementById('sol')
         var c1= document.getElementById('c1')
         var c2= document.getElementById('c2')
@@ -60,7 +64,7 @@
         
         var matriz_nome = [0,
                            ['Foguete Saturno V', 'Nebulosas'], 
-                           ['Vulcão Azul', 'Girassóis', 'Fonte Evereste', 'FAbelhas'], 
+                           ['Vulcão Azul', 'Girassóis', 'Monte Evereste', 'Abelhas'], 
                            ['O Telescópio'],
                            ['Torre Eiffel', 'Canal do Panamá']]
 
@@ -85,10 +89,50 @@
         var selecionar = 0 // Qual a categoria selecionada
         var tam_cat = 0 // Comprimento da categoria selecionada
         var janela = 0
+        var na_pesquisa = 0
 
         var img = 0
         var titulo = 0
         var link = 0
+
+
+        var mi = []
+        var mn = []
+        var ml = []
+
+
+        // Para fazer a pesquisa
+        function pesquisando(){
+            var texto = pesquisa.value.toUpperCase()
+            var palavras = []
+            var ajuda = []
+            var posicoes = [[],[]]
+            if (texto.length > 0){
+                na_pesquisa = 1
+                for (var p= 0; p < matriz_nome.length; p++){   
+                    for (var t=0; t< matriz_nome[p].length; t++){
+                        if (texto[0] == matriz_nome[p][t][0]){
+                            var upper = matriz_nome[p][t].toUpperCase()
+                            for (var h=0; h< texto.length; h++){
+                                if (upper[h] != texto[h]){
+                                    if (ajuda.indexOf(upper) == -1){
+                                        ajuda.push(upper) 
+                                    }                       
+                                }
+                            }
+                            if (ajuda.indexOf(upper) == -1){
+                                palavras.push(upper)
+                                posicoes[0].push(p)
+                                posicoes[1].push(t)
+                            } 
+                        }
+                    }    
+                }
+            }else{
+                na_pesquisa=0
+            }
+            carregar(palavras, posicoes)
+        }
 
         // Serve para esconder e mostrar as categorias
         function esconder(){
@@ -119,13 +163,16 @@
             while(sec.firstChild){
                 sec.removeChild(sec.firstChild)
                 lista.pop()
+                mi.pop()
+                mn.pop()
+                ml.pop()
             }
         }
 
+        //Identifica qual categoria foi selecionada
         for(var c = 0; c < lis_categorias.length; c++){
             lis_categorias[c].addEventListener("click", function () {
             selecionar = lis_categorias.indexOf(this)
-            //window.alert(selecionar +'e')
             valor = selecionar
             localStorage.setItem('selecionado', valor)
             carregar()
@@ -133,14 +180,27 @@
         }
 
         //Mostra na tela os itens da categoria selecionada
-        function carregar(){
+        function carregar(palavras, posicoes){
             limpar()
+            if (na_pesquisa == 0){
+                img = matriz_img[selecionar]
+                    titulo = matriz_nome[selecionar]
+                    link = matriz_link[selecionar] 
+                    
+                    tam_cat = titulo.length
             
-            img = matriz_img[selecionar]
-                titulo = matriz_nome[selecionar]
-                link = matriz_link[selecionar] 
-                
-                tam_cat = titulo.length
+            }else{
+                for (var g = 0; g < palavras.length; g++){
+                    mi.push(matriz_img[posicoes[0][g]][posicoes[1][g]])
+                    mn.push(palavras[g])
+                    ml.push(matriz_link[posicoes[0][g]][posicoes[1][g]])
+                }
+                img = mi
+                titulo = mn
+                link = ml
+                    
+                tam_cat = palavras.length
+            }
             return exe(tam_cat, selecionar)
         }  
         
@@ -170,7 +230,8 @@
             
             // Para pegar o  link certo
             lista[i].addEventListener("click", function () {
-            window.location.href= link[lista.indexOf(this)];  // window.open("teste.html"); abre o link em uma nova guia 
+            window.location.href= link[lista.indexOf(this)];  // window.open("teste.html"); abre o link em uma nova guia
+            pesquisa.value = '' 
             })
         }
         
