@@ -13,7 +13,7 @@
 <body>
     
     <section id="se1">
-        <div id="sol">Sol</div>
+        <img id="sol" src="sol.png" alt="">
         <div id="menu"> Esconder Categorias</div>
         <input id="pesquisa" type="text" placeholder="Pesquisar">
 
@@ -36,7 +36,6 @@
     </section>
     <section id="se3">
 
-
     </section>
     <section id="se4">
 
@@ -53,7 +52,7 @@
         
         var pesquisa = document.getElementById('pesquisa')
         pesquisa.addEventListener('keyup', pesquisando)
-
+        
         var sol= document.getElementById('sol')
         var c1= document.getElementById('c1')
         var c2= document.getElementById('c2')
@@ -62,19 +61,19 @@
         
         var lis_categorias = [sol, c1, c2, c3, c4]
         
-        var matriz_nome = [0,
+        var matriz_nome = [['O Conhecimento Ilumina o Mundo'],
                            ['Foguete Saturno V', 'Nebulosas'], 
                            ['Vulcão Azul', 'Girassóis', 'Monte Evereste', 'Abelhas'], 
                            ['O Telescópio'],
                            ['Torre Eiffel', 'Canal do Panamá']]
 
-        var matriz_img = [0,
+        var matriz_img = [['sol.png'],
                           ['', ''],            
                           ['', 'girassois/girassois ico.jpg', '', ''], 
                           [''],
                           ['', '']]
 
-        var matriz_link = [0,
+        var matriz_link = [['#'],
                            ["foguete saturno v/foguete saturno v.html", 
                            "nebulosas/nebulosas.html"], 
                            ["vulcao azul/vulcao azul.html", "girassois/girassois.html", 
@@ -174,21 +173,25 @@
             lis_categorias[c].addEventListener("click", function () {
             selecionar = lis_categorias.indexOf(this)
             valor = selecionar
+
             localStorage.setItem('selecionado', valor)
             carregar()
             })
         }
 
         //Mostra na tela os itens da categoria selecionada
-        function carregar(palavras, posicoes){
+        function carregar(palavras, posicoes){                    
             limpar()
+            // Para as opoçaoes normais
             if (na_pesquisa == 0){
+                
                 img = matriz_img[selecionar]
-                    titulo = matriz_nome[selecionar]
-                    link = matriz_link[selecionar] 
+                titulo = matriz_nome[selecionar]
+                link = matriz_link[selecionar] 
                     
-                    tam_cat = titulo.length
+                tam_cat = titulo.length
             
+            // Para o modo pesquisa        
             }else{
                 for (var g = 0; g < palavras.length; g++){
                     mi.push(matriz_img[posicoes[0][g]][posicoes[1][g]])
@@ -207,50 +210,51 @@
         carregar()
 
         //Responsavel por colocar a imagem e o texto na div do item
-        function exe(tam_cat, selecionar){
-        for ( var i = 0; i < tam_cat; i++){  
-            //Adiciona uma nova div na lista
-            lista.push( document.createElement("DIV") );     
-            
-            // Da um id para o item na lista
-            lista[i].setAttribute('class', 'd1')
-            
-            // Adiciona o item na sessão 3 no html
-            sec.appendChild(lista[i])
+        function exe(tam_cat, selecionar){     
+            for ( var i = 0; i < tam_cat; i++){              
+                //Adiciona uma nova div na lista
+                lista.push( document.createElement("DIV") );     
+                
+                // Da um id para o item na lista
+                lista[i].setAttribute('class', 'd1')
+                
+                // Adiciona o item na sessão 3 no html
+                sec.appendChild(lista[i])
 
-            // Adicina uma imagem na div
-            list_im[i] = document.createElement('img')
-            list_im[i].setAttribute('src', img[i])  
-            lista[i].appendChild(list_im[i])
-            
-            //Adiciona um texto na div
-            list_txt[i] = document.createElement('p')
-            list_txt[i].innerHTML = titulo[i]
-            lista[i].appendChild(list_txt[i])
-            
-            // Para pegar o  link certo
-            lista[i].addEventListener("click", function () {
-            window.location.href= link[lista.indexOf(this)];  // window.open("teste.html"); abre o link em uma nova guia
-            pesquisa.value = '' 
-            })
-        }
-        
-        // Parte resposavel por colocar a cor de fundo da categoria selecionada
-        var secundaria = []
-        for (var c =1; c < lis_categorias.length; c++){
-            if (c != selecionar){
-                secundaria.push(lis_categorias[c])
+                // Adicina uma imagem na div
+                list_im[i] = document.createElement('img')
+                list_im[i].setAttribute('src', img[i])  
+                lista[i].appendChild(list_im[i])
+                
+                //Adiciona um texto na div
+                list_txt[i] = document.createElement('p')
+                list_txt[i].innerHTML = titulo[i]
+                lista[i].appendChild(list_txt[i])
+                
+                // Para pegar o  link certo
+                lista[i].addEventListener("click", function () {
+                window.location.href= link[lista.indexOf(this)];  // window.open("teste.html"); abre o link em uma nova guia
+                // Limpa o campo de pesquisa
+                pesquisa.value = '' 
+                })
             }
-        }
-        // If que limpa todas cores ao clicar no item sol
-        if (selecionar > 0){
-        lis_categorias[selecionar].style.backgroundColor = 'rgb(77, 89, 250)';
-        }
-        for (var t = 0; t < secundaria.length; t++){
-            if (secundaria[t].style.backgroundColor == 'rgb(77, 89, 250)'){   
-                secundaria[t].style.backgroundColor = 'rgb(114, 238, 90)';
+            
+            // Parte resposavel por colocar a cor de fundo da categoria selecionada
+            var secundaria = []
+            for (var c =1; c < lis_categorias.length; c++){
+                if (c != selecionar){
+                    secundaria.push(lis_categorias[c])
+                }
             }
-        }
+            // If que limpa todas cores ao clicar no item sol
+            if (selecionar > 0){
+            lis_categorias[selecionar].style.backgroundColor = 'rgb(77, 89, 250)';
+            }
+            for (var t = 0; t < secundaria.length; t++){
+                if (secundaria[t].style.backgroundColor == 'rgb(77, 89, 250)'){   
+                    secundaria[t].style.backgroundColor = 'rgb(114, 238, 90)';
+                }
+            }
         }
 
 
