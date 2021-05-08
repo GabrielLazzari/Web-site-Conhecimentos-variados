@@ -65,7 +65,9 @@ body{
 
 #se4{
     background-color: rgb(80, 90, 250);
-    min-height: 82px;
+
+    font-size: 35px;
+    padding: 21px;
 }
 
 img{
